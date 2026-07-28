@@ -1,0 +1,23 @@
+{
+  "policy": {
+    "policy_version": "2026-07-28",
+    "approved_providers": ["provider-a", "provider-b"],
+    "require_fallback": true,
+    "human_review_classifications": ["restricted"],
+    "models": [
+      {"model_id": "general-fast", "provider": "provider-a", "status": "active", "max_data_classification": "confidential", "allowed_risk_levels": ["low", "medium"], "cost_per_1k_tokens": 0.01, "p95_latency_ms": 600},
+      {"model_id": "governed-reasoner", "provider": "provider-b", "status": "active", "max_data_classification": "restricted", "allowed_risk_levels": ["low", "medium", "high"], "cost_per_1k_tokens": 0.02, "p95_latency_ms": 800},
+      {"model_id": "legacy-model", "provider": "provider-a", "status": "retired", "max_data_classification": "restricted", "allowed_risk_levels": ["low"], "cost_per_1k_tokens": 0.005, "p95_latency_ms": 500}
+    ]
+  },
+  "request": {
+    "request_id": "case-management-summary",
+    "data_classification": "confidential",
+    "risk_level": "medium",
+    "estimated_tokens": 1800,
+    "cost_budget_usd": 0.05,
+    "latency_slo_ms": 1000,
+    "allowed_providers": ["provider-a", "provider-b"],
+    "preferred_models": ["governed-reasoner"]
+  }
+}
